@@ -5,7 +5,7 @@ import streamlit as st
 from sklearn.linear_model import LinearRegression
 
 # Membaca data
-data = pd.read_csv('covid_19_indonesia_time_series_all.csv')
+data = pd.read_csv('studi-kasus-covid-daming.csv')
 
 # Menyiapkan data untuk analisis densitas penduduk
 # Menghapus simbol persen dan mengonversi ke float
@@ -43,16 +43,14 @@ sns.set_theme(style="whitegrid", palette="muted")
 # Grafik 1: Total Kasus Aktif berdasarkan Pulau
 with st.container():
     st.subheader("Total Kasus Aktif Berdasarkan Pulau")
-    plt.figure(figsize=(12, 6))
-    sns.barplot(
-        x='Island', 
-        y='Total Active Cases', 
-        data=data, 
-        palette="viridis"
-    )
-    plt.title('Total Kasus Aktif Berdasarkan Pulau', fontsize=16, fontweight='bold')
-    plt.xlabel('Pulau', fontsize=12)
-    plt.ylabel('Total Kasus Aktif', fontsize=12)
+
+    # Buat plot
+    plt.figure(figsize=(10, 6))
+    sns.barplot(x='Island', y='Total Active Cases', hue='Cluster', data=data)
+    plt.title('Total Active Cases by Island and Cluster')
+    plt.xlabel('Island')
+    plt.ylabel('Total Active Cases')
+    plt.legend(title='Cluster')
     st.pyplot(plt)
 
 # Grafik 2: Pengaruh Densitas Penduduk
