@@ -66,6 +66,9 @@ Cluster dengan tingkat pemulihan yang tinggi menunjukkan daerah dengan respons k
 elif option == "Supervised Learning":
     st.title("Supervised Learning: Random Forest Regressor")
     
+    # Handle missing values
+    data = data.dropna(subset=['Total Cases'])
+    
     # Train-test split
     X = data[columns_to_scale]
     y = data['Total Cases']
@@ -79,8 +82,8 @@ elif option == "Supervised Learning":
     # Metrics
     rf_mse = mean_squared_error(y_test, y_rf_pred)
     rf_r2 = r2_score(y_test, y_rf_pred)
-    st.write(f"Mean Squared Error: {rf_mse:.2f}")
-    st.write(f"R2 Score: {rf_r2:.2f}")
+    st.write("Mean Squared Error:", rf_mse)
+    st.write("R2 Score:", rf_r2)
     
     # Plotting actual vs predicted values
     plt.figure(figsize=(10, 6))
@@ -114,5 +117,3 @@ Plot ini menunjukkan hubungan antara nilai aktual dan prediksi Total Cases. Titi
 **3.Residual Plot:**
 
 Residual plot menunjukkan kesalahan prediksi. Residual yang tersebar secara acak di sekitar garis horizontal menunjukkan model yang tidak bias.""")
-
-# Run the app with: streamlit run dashboard.py
